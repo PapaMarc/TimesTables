@@ -52,6 +52,8 @@ while($true) {
             }
         }
         else {
-            $Speech.Speak("You did not provide an answer.")
+            Write-Host "The correct answer is $Product"
+            Write-host "---"
+            $Speech.Speak("You did not provide an answer. The correct answer is $Product.")
     }
 }
