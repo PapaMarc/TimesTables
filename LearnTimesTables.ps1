@@ -11,21 +11,28 @@
 $Array_AttaKiddo = @("Great Job!","Congrats","Hurrah","Correct","Booyakasha diggity check this out","Boom","Way to go","High Five","Cheers","Woot","Homerun","wicked","superb","Impressive","Awesome","Great job","Terrific","You get a gold star","Well done","tray bien","dway","muey beuno","exacto")
 $Array_GetBackUpOnTheHorse = @("Doh","Oops","Almost - try again","Not quite","Nope","Thats not it","Nice try buddy","Not so much","No soup for you!","Bummer dude!","If at first you dont succeed try, try again","Nahhh","Bu dway")
 
-
+# Note: if you're attempting to execute this in PowerShell6 or PowerShell7 you won't hear anything
+# This .dll is from .Net, whereas PS6 and 7 are .Net CORE and that API is not ported.
+# More here re: PS6 https://github.com/PowerShell/PowerShell/issues/8809
+# And the ongoing discussion here re: PS7 https://github.com/dotnet/wpf/issues/2935
 Add-Type -AssemblyName System.Speech
 $Speech = New-Object System.Speech.Synthesis.SpeechSynthesizer
-$Speech.Speak("Do  you want to play a game? Enter times table to practice, or hit enter for all tables up to 12")
+$Speech.Speak("Do  you want to play a game? Enter times table of your choice, or just hit enter for all tables up to 12. Make any other entry and i'll focus on Tables 6 to 9.")
 
 #   Pick your poison
-[Int]$InitTable = Read-Host -Prompt ("Enter times table to practice, or hit enter for all tables up to 12")
+Write-Host "Enter Times Table of your choice, or just hit enter for all Tables up to 12."
+$InitTable = Read-Host -Prompt ("Make any other entry and i'll focus on Tables 6 to 9")
 $Table = $InitTable
 
 while($true) {
-    If ($InitTable -eq 0) {
-    [Int]$Table = (Get-Random -Minimum 1 -Maximum 12)
+    If ($InitTable -eq "") {
+    $Table = (Get-Random -Minimum 1 -Maximum 13)
     }
-        [Int]$Factor = (Get-Random -Minimum 1 -Maximum 12)
-        [Int]$Product =  $Table * $Factor
+    Elseif ($InitTable -NotIn 1..12) {
+        $Table = (Get-Random -Minimum 6 -Maximum 10) 
+    } 
+        [Int]$Factor = (Get-Random -Minimum 1 -Maximum 13)
+        [Int]$Product =  [Int]$Table * $Factor
         $Assignment = "$Table x $Factor"
         $Speech.Speak("$Table times ;$Factor equals")
         $Answer = Read-Host -Prompt $Assignment
