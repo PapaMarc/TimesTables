@@ -8,8 +8,8 @@
 
 # Define AttaKiddo and GetBackUpOnTheHorse Arrays
 # used to provide some variation in spoken responses
-$Array_AttaKiddo = @("Great Job!","Congrats","Hurrah","Correct","Booyakasha diggity check this out","Boom","Way to go","High Five","Cheers","Woot","Homerun","wicked","superb","Impressive","Awesome","Great job","Terrific","You get a gold star","Well done","tray bien","dway","muey beuno","exacto")
-$Array_GetBackUpOnTheHorse = @("Doh","Oops","Almost - try again","Not quite","Nope","Thats not it","Nice try buddy","Not so much","No soup for you!","Bummer dude!","If at first you dont succeed try, try again","Nahhh","Bu dway")
+$Array_AttaKiddo = @("Great Job!","Congrats","Hurrah","Correct","Booyakasha diggity check this out","Boom","Way to go","High Five","Cheers","Woot","Homerun","wicked","superb","Impressive","Awesome","Great job","Terrific","You get a gold star","Well done","tray bien","dway","muey bwaino","exacto","Hey hey Bu Bu-- you're smarter than the average bear","Here you come to save the day","To infinity and beyond!","Yab a dab a doo!")
+$Array_GetBackUpOnTheHorse = @("Doh","Oops","Almost - try again","Not quite","Nope","Thats not it","Nice try buddy","Not so much","No soup for you!","Bummer dude!","If at first you dont succeed try, try again","Nahhh","Bu dwaiy","Dratz","Foiled again","You blockhead!","Heavens to Murgatroid","Thats all i can stand and i cant stands no more","Sufferin Succotash!","Ay caramba","Good grief","Zoinks")
 
 # Note: if you're attempting to execute this in PowerShell6 or PowerShell7 you won't hear anything
 # This .dll is from .Net, whereas PS6 and 7 are .Net CORE and that API is not ported.
@@ -24,7 +24,11 @@ Write-Host "Enter Times Table of your choice, or just hit enter for all Tables u
 $InitTable = Read-Host -Prompt ("Make any other entry and i'll focus on Tables 6 to 9")
 $Table = $InitTable
 
-while($true) {
+$TheEnd = (Get-Date).AddMinutes(10)
+while ((Get-Date) -lt $TheEnd) {
+# Do stuff
+# OR no timer comment out above and uncomment below while($true)
+#while($true) {
     If ($InitTable -eq "") {
     $Table = (Get-Random -Minimum 1 -Maximum 13)
     }
@@ -64,3 +68,4 @@ while($true) {
             $Speech.Speak("You did not provide an answer. The correct answer is $Product.")
     }
 }
+$Speech.Speak("Greetings Professor Falken. Hello. A strange game. How about a nice game of Chess?")
