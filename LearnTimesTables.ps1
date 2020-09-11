@@ -8,7 +8,7 @@
 
 # Define AttaKiddo and GetBackUpOnTheHorse Arrays
 # used to provide some variation in spoken responses
-$Array_AttaKiddo = @("Great Job!","Congrats","Hurrah","Correct","Booyakasha diggity check this out","Boom","Way to go","High Five","Cheers","Woot","Homerun","wicked","superb","Impressive","Awesome","Great job","Terrific","You get a gold star","Well done","tray bien","dway","muey bwaino","exacto","Hey hey Bu Bu-- you're smarter than the average bear","Here you come to save the day","To infinity and beyond!","Yab a dab a doo!")
+$Array_AttaKiddo = @("Great Job!","Congrats","Hurrah","Correct","Booyakasha diggity check this out","Boom","Way to go","High Five","Cheers","Woot","Homerun","wicked","superb","Impressive","Awesome","Great job","Terrific","You get a gold star","Well done","tray bien","dway","muey bwaino","exacto","Hey hey Bu Bu-- you're smarter than the average bear","Here you come to save the day","To infinity and beyond!","Yabadabadoo!")
 $Array_GetBackUpOnTheHorse = @("Doh","Oops","Almost - try again","Not quite","Nope","Thats not it","Nice try buddy","Not so much","No soup for you!","Bummer dude!","If at first you dont succeed try, try again","Nahhh","Bu dwaiy","Dratz","Foiled again","You blockhead!","Heavens to Murgatroid","Thats all i can stand and i cant stands no more","Sufferin Succotash!","Ay caramba","Good grief","Zoinks")
 
 # Note: if you're attempting to execute this in PowerShell6 or PowerShell7 you won't hear anything
@@ -41,7 +41,15 @@ while ((Get-Date) -lt $TheEnd) {
         $Speech.Speak("$Table times ;$Factor equals")
         $Answer = Read-Host -Prompt $Assignment
         if ($Answer.Length -gt 0) {
-            if ($Product -eq $Answer) {
+            if ($Answer -eq "exit") {
+                exit
+            }
+            if ($Answer -eq "lol") {
+                $Speech.Speak("Ha Ha Ha. Now get back to the game child.")
+                Write-Host "The correct answer is $Product"
+                Write-host "---"
+            } 
+            elseif ($Product -eq $Answer) {
                 Write-host "Correct" -ForegroundColor "Green"
                 Write-host "---"
                 $Recognition = $Array_AttaKiddo | Get-Random
