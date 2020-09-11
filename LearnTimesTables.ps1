@@ -8,7 +8,7 @@
 
 # Define AttaKiddo and GetBackUpOnTheHorse Arrays
 # used to provide some variation in spoken responses
-$Array_AttaKiddo = @("Great Job!","fish on!","Congrats","Hoo rahh","Correct","Booyakasha diggity check this out","Boom","Way to go","High Five","Cheers","Woot","Homerun","wicked","superb","Impressive","Awesome","Great job","Terrific","You get a gold star","Well done","tray bien","dway","moi bwaino","exacto","Hey hey boo boo-- you're smarter than the average bear","Here i come to save the day","To infinity and beyond!","yeba daba doo","digga dunch!","oh Kent","yeet!","yippee kai yay","aint no stoppin us now, weir on the move")
+$Array_AttaKiddo = @("Great Job!","fish on!","Congrats","Hoo rahh","Correct","Booyakasha diggity check this out","Boom","Way to go","Play on, player","High Five","Cheers","Woot","Homerun","wicked","superb","Impressive","Awesome","Great job","Terrific","You get a gold star","Well done","tray bien","dway","moi bwaino","exacto","Hey hey boo boo-- you're smarter than the average bear","Here i come to save the day","To infinity and beyond!","yeba daba doo","digga dunch!","oh Kent","yeet!","yippee kai yay","aint no stoppin us now, weir on the move")
 $Array_GetBackUpOnTheHorse = @("uh uh","nyet","boo shir da","that one snapped the line","lathose","you are mistaken","unsuitable","beam me up scotty","that one got away from you","error","insanity laughs under pressure weir cracking, cant we give ourselves one more chance?","does not compute","people forget. forget theyre hiding behind an eminence front","illogical","off target","goose aige","air ball","meh","Doh","Oops","Almost - try again","Not quite","Nope","Thats not it","Nice try buddy","Not so much","No soup for you!","Bummer dude!","If at first you dont succeed try, try again","Nahhh","Boo dway","Dratz","Foiled again","You blockhead!","Heavens to Murgatroid","Thats all i can stand and i cant stands no more","Sufferin Succotash!","Ay caramba","Good grief","Zoinks","and i guess thats why they call it the blues","im gonna say it yeah... go back to scoolin")
 
 # Note: if you're attempting to execute this in PowerShell6 or PowerShell7 you won't hear anything
@@ -42,6 +42,7 @@ while ((Get-Date) -lt $TheEnd) {
         $Answer = Read-Host -Prompt $Assignment
         if ($Answer.Length -gt 0) {
             if ($Answer -eq "exit") {
+                $Speech.Speak("C yuh! peace out")
                 exit
             }
             if ($Answer -eq "lol") {
