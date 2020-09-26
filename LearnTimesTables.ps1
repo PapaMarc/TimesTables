@@ -82,7 +82,8 @@ while ((Get-Date) -lt $TheEnd) {
         [Int]$Product =  [Int]$Table * $Factor
         $Assignment = "$Table x $Factor"
         $Speech.Speak("$Table times ;$Factor equals")
-        $Answer = Read-Host -Prompt $Assignment
+        $HOST.UI.RawUI.Flushinputbuffer() #again... this clears out the input buffer immediately prior to prompt
+		$Answer = Read-Host -Prompt $Assignment
         if ($Answer.Length -gt 0) {
 #           wants to quit
             if ($Answer -eq "exit") {
@@ -166,6 +167,8 @@ $RndPercentRight = [math]::Round($PercentRight,2)
 Write-Host "Final Tally: you answered $TotalCorrect correctly of $TotalAsked questions asked, or a $RndPercentRight% in","$nMin","min."
 $Speech.Speak("Seriously... you scored '$TotalCorrect' out of '$TotalAsked', or '$RndPercentRight' percent in '$nMin' minutes.")
 
+if ([Int]$RndPercentRight -lt 100) {
+# then let's enumerate what was missed
 Write-Host "Here are the ones you missed:"
 
 # $ht_missed | ConvertTo-Json -depth 3          #works... dumps to screen json
@@ -187,10 +190,16 @@ foreach ($key in $ht_missed.keys) {
         $Prod = $Tab * $Fac#        write-host $ProbNo '#' $Tab '*' $Fac '=' $Prod
         write-host "#$ProbNo",':',"  $Tab * $Fac = $Prod"
         write-host '-'
+        }
+    $Speech.Speak("Here's what you missed. Review these... and you'll get'em next time!")
     }
-
-$Speech.Speak("Here's what you missed. Review these... and you'll get'em next time!")
+    elseif  ([Int]$RndPercentRight -eq 100) {
+    $Speech.Speak("Flawless.")
+    $Speech.SelectVoice("Microsoft Zira Desktop")
+    $Speech.Speak("Great job!")
+    }
 #   and just for a little more fun with speech...
+$Speech.SelectVoice("Microsoft David Desktop")
 $s = $env:POWERSHELL_DISTRIBUTION_CHANNEL
 $s = $s.split(":")[1]
 $Speech.Speak("And... for what it's worth. I enjoyed running on your '$s' PC, sporting an '$env:PROCESSOR_IDENTIFIER' processor... $Student")
